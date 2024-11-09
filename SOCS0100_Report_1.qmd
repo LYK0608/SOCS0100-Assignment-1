@@ -1,6 +1,23 @@
-# Set Up My Environment
+---
+title: "SOCS0100_Report_1"
+author: "YIKE LI"
+format: html
+editor: visual
+---
+
+## Introduction
+This report is my first assignment for my SOCS0100 course as a UCL BASc student. I investigated global disparities in energy and clean fuel access using data from the World Bank. Key variables in the dataset include "Entity" (representing the country or region), "Year," "Number of people with access to electricity," "Number of people without access to electricity," "Number of people using clean fuels for cooking," and "Number of people without clean fuels for cooking."
+
+By leveraging statistical and visualisation skills of data wrangling, analysis, and visualisation I learnt, I aim to highlightand visualise the differences in energy availability and identify trends that could inform targeted interventions and policy decisions. 
+
+## Rationale Behind My selection of this Dataset
+I chose this dataset on energy and clean fuel access because it is critical from a social science perspective as it directly relates to fundamental issues of social equity and development. In specific, energy access is a key determinant of socio-economic well-being, impacting health, education, and economic opportunities. 
+Also, the access of clean fuels and electricity in underdeveloped regions have always been unappreciated, therefore, my analysis is significant in understanding how uneven access to energy perpetuates poverty and affects sustainable development, thereby contributing to informed policy discussions on bridging these global disparities.
+
+## Setting Up the Environment
+To begin the analysis, I first set the working directory to a folder on my desktop, ensuring all file-related commands would default to this location. Fun fact: I use the alias "felix" as my computer name (and for coffee orders at Starbucks).
+```{r}
 setwd("/Users/felixli/Desktop/SOCS0100-Assignment-1")
-# felix is the fake name I use on my laptop, internet, and starbucks lol
 rm(list = ls())
 if (!require("pacman")) {
   install.packages("pacman")
@@ -13,11 +30,15 @@ pacman::p_load(
   ggplot2
 )
 options(scipen=999)
-
-# Import data
+```
+## Import Data
+I import the CSV file data named “Number of people with and without energy access (OWID based on World Bank, 2021).csv” into R, storing it in the energy_access_data variable. 
+```{r}
 energy_access_data <- read.csv("Number of people with and without energy access (OWID based on World Bank, 2021).csv", header = TRUE)
-
-# Data exploration
+```
+## Data Exploration
+I tried to load the skimr, dplyr, and tidyr libraries to facilitate data exploration, manipulation, and give myself a clearer idea of what this data is about.
+```{r}
 library(skimr)  # Load the data exploration package
 library(dplyr)
 library(tidyr)
@@ -25,15 +46,24 @@ skim(energy_access_data)  # Get data overview
 str(energy_access_data)  # Display data structure
 head(energy_access_data)  # Show the first few rows of data
 summary(energy_access_data)  # Overview statistics
+```
+## Interpretation of the Descriptive Statistics
+The descriptive statistics reveal stark disparities in global energy access. Electricity access ranges widely, with some regions having near-universal coverage (up to 6.9 billion people), while others have very limited access, as indicated by the median of around 5.4 million but a skewed mean of 199 million. Similarly, clean fuel access shows substantial variability, with a median of about 5.1 million people with access but a mean of 158 million, indicating a few regions with very high access skewing the average. 
 
-# Check for missing values
+However, this result is not reliable because I have not fully cleaned the data. I will analyse it again in the following sections when I've fully done the data cleaning part.
+
+## Check for Missing Values
+In this section, I checked the dataset for missing values, because I thought there had to be some tricky data that required me to do something about it. 
+```{r}
 missing_values <- energy_access_data %>%
   summarise(across(everything(), ~ sum(is.na(.))))
 print("Number of missing values in each column:")
 print(missing_values)
-skim(energy_access_data)  # Get data overview again
-
-# Data types and unique value counts
+skim(energy_access_data)
+```
+## Data Types and Unique Value Counts
+Next, I wanted to confirm the data types of all columns and determine how diverse the entries were within each column. This helps reveal whether some columns need to be converted to other data types and identifies any inconsistencies or outliers.
+```{r}
 data_types <- energy_access_data %>%
   summarise(across(everything(), ~ class(.)))
 unique_counts <- energy_access_data %>%
@@ -42,19 +72,18 @@ print("Data types for each column:")
 print(data_types)
 print("Unique value count for each column:")
 print(unique_counts)
-
-# List all unique entity names
 unique_entities <- unique(energy_access_data$Entity)
 print(unique_entities)
-
-# Remove unnecessary regions and international organizations
+```
+## Removing Unnecessary Regions and International Organizations
+To focus my analysis solely on individual countries, I filterted out entities that were not representative of distinct national units. These unnecessary entities included aggregate regions, demographic groupings, and international organisations.
+```{r}
 filter_entities <- function(data, entities_to_remove) {
   filtered_data <- data %>%
     filter(!Entity %in% entities_to_remove)  # Filter out unselected entities
   return(filtered_data)
 }
 
-# Define entities to be removed
 entities_to_remove <- c(
   "Africa Eastern and Southern", "Africa Western and Central", "Arab World",
   "Caribbean Small States", "Central Europe and the Baltics", "Early-demographic dividend",
@@ -72,21 +101,16 @@ entities_to_remove <- c(
   "Sub-Saharan Africa", "Sub-Saharan Africa (excluding high income)", "Sub-Saharan Africa (IDA & IBRD)",
   "Upper middle income", "World"
 )
-
-# Filter data
 filtered_data <- filter_entities(energy_access_data, entities_to_remove)
-
-# Define a function to calculate statistics for numeric columns
+```
+## Calculating Descriptive Statistics for Numeric Columns Again with Filtered Data
+To better understand the numeric variables in my dataset, I defined a function called calculate_statistics(), which calculates basic descriptive statistics for each numeric column. These statistics include the mean, standard deviation, minimum, maximum, and median.
+```{r}
 calculate_statistics <- function(data) {
-  # Get numeric columns, excluding the first and second columns
   numeric_columns <- data %>% select(-c(1, 2)) %>% select(where(is.numeric))
-  # Initialize a list to store statistics
   stats_list <- list()
-  # Loop through each numeric column
   for (col in names(numeric_columns)) {
-    # Filter out 0 and missing values
     filtered_col <- numeric_columns[[col]] %>% na.omit() %>% .[. != 0]
-    # Calculate statistics
     stats <- list(
       mean = mean(filtered_col),
       sd = sd(filtered_col),
@@ -94,56 +118,56 @@ calculate_statistics <- function(data) {
       max = max(filtered_col),
       median = median(filtered_col)
     )
-    # Add statistics to the list
     stats_list[[col]] <- stats
   }
   return(stats_list)
 }
-# Call the function to calculate statistics
 stats <- calculate_statistics(filtered_data)
-# Print statistics
 print(stats)
+```
+## Handling Missing Values
+This part took me a few days. But luckily I made it in the end. 
 
+I implemented a function called handle_missing_values() to handle missing, zero, and empty values in the dataset. By automating the replacement of missing values with calculated means or default values, this function allows me to make data more robust but also maintained consistency across different steps of the analysis. It saved time compared to manually addressing each instance of missing data and guaranteed that the same logic was applied throughout. 
+```{r}
 handle_missing_values <- function(data) {
-  # Group data by Entity column
   grouped_data <- data %>% group_by(Entity)
-  
-  # Calculate column means (ignore NA) within each group
   means <- grouped_data %>% 
     summarise(across(where(is.numeric), ~ mean(., na.rm = TRUE)), .groups = 'drop')
-  # Fill missing values, 0, and empty values with means
   clean_data <- grouped_data %>%
     mutate(across(where(is.numeric), ~ {
       col_name <- cur_column()
       ifelse(is.na(.) | . == 0, means[[col_name]][match(Entity, means$Entity)], .)
     })) %>%
-    mutate(across(where(is.character), ~ ifelse(is.na(.) | trimws(.) == "", "Default Value", .)))  # Fill string columns with "Default Value"
+    mutate(across(where(is.character), ~ ifelse(is.na(.) | trimws(.) == "", "Default Value", .))) 
   
   return(clean_data)
 }
 
-# Test function
-filtered_data_no_na <- handle_missing_values(filtered_data)  # Cleaned data
-head(filtered_data_no_na)  # View the first few rows of data
+filtered_data_no_na <- handle_missing_values(filtered_data)
+head(filtered_data_no_na) 
+```
+## Secondary Data Cleaning
+To further ensure data quality, I created a function called filter_data() to perform additional cleaning steps beyond filling missing and zero values. 
 
-# Secondary cleaning, define a function to filter data
+By encapsulating this process in a function, I ensured that these specific filtering criteria could be systematically applied whenever necessary, which improved both the efficiency and reproducibility of my workflow. 
+```{r}
 filter_data <- function(data) {
-  # Delete rows with missing values
   data <- na.omit(data)
-  # Delete rows where all columns have a value of 0
   data <- data[rowSums(data == 0) == 0, ]
-  # Check each column, remove entire row if values are less than 100
   data <- data[rowSums(data < 100) == 0, ]
   return(data)
 }
 
 filtered_data_no_na <- filter_data(filtered_data_no_na)
 
-# Output cleaned data to a CSV file
 output_file <- "cleaned_data.csv"
 write.csv(filtered_data_no_na, file = output_file, row.names = FALSE)
+```
 
-# Descriptive statistics
+## Descriptive Statistics Calculation
+In this step, I calculated key descriptive statistics for all numeric columns in the dataset. These statistics include: Mean, Median, Standard Deviation (sd), Minimum (min) and Maximum (max). I used na.rm = TRUE to ensure that any missing values are ignored during these calculations, making the statistics more accurate. 
+```{r}
 descriptive_stats <- filtered_data_no_na %>%
   summarise(across(where(is.numeric), list(
     mean = ~ mean(., na.rm = TRUE),  
@@ -154,8 +178,10 @@ descriptive_stats <- filtered_data_no_na %>%
   )))
 print("Descriptive statistics for numeric columns:")
 print(descriptive_stats)
-
-# Select variables and rename columns
+```
+## Selecting and Renaming Columns
+In this section, I refined the dataset by selecting the columns that are relevant for analysis, specifically focusing on variables related to energy and clean fuels access. I then renamed these columns to more concise names for clarity. 
+```{r}
 selected_data <- filtered_data_no_na %>%
   select(
     Entity, 
@@ -173,17 +199,19 @@ selected_data <- filtered_data_no_na %>%
     Clean_Fuels = number_with_clean_fuels_cooking,
     No_Clean_Fuels = number_without_clean_fuels_cooking
   )
+```
 
+## Processing Data: Reshaping for Analysis
+Here, I defined a function called process_data to perform additional data manipulation. The function first selects specific variables of interest, and then creates new variables.
+```{r}
 process_data <- function(df) {
-  # Select variables
+
   selected_data <- df %>%
     select(Country, Year, Electricity, No_Electricity, Clean_Fuels, No_Clean_Fuels)
-  
-  # Create new variable
+
   new_variable_data <- selected_data %>%
     mutate(Total_Population = Electricity + No_Electricity)
   
-  # Reshape data frame
   reshaped_data <- new_variable_data %>%
     pivot_longer(
       cols = c(Electricity, No_Electricity, Clean_Fuels, No_Clean_Fuels, Total_Population),
@@ -196,9 +224,11 @@ process_data <- function(df) {
 
 reshaped_data<- process_data(selected_data)
 
-# View final processed data
 print(head(reshaped_data))
-
+```
+## Calculating Access Rates and Selecting Latest Data
+In this step, I calculated two important metrics: Electricity Access Rate and Clean Fuels Access Rate for each country. These rates are computed as the proportion of people with access to electricity or clean fuels out of the total population, while handling cases where total population or access is zero to prevent division errors.
+```{r}
 # Calculate electricity access rate
 selected_data <- selected_data %>%
   mutate(
@@ -212,12 +242,19 @@ latest_data <- selected_data %>%
   filter(Year == max(Year)) %>%
   ungroup()
 
-head(latest_data)  
+head(latest_data)  # View the latest year's data
 
 # Output cleaned data to a CSV file
 output_file <- "cleaned_data_2.csv"
 write.csv(latest_data, file = output_file, row.names = FALSE)
+```
+## Visualising Access Rates
+To understand the distribution and trends of electricity access rates, I  plotted a histogram showing the distribution of electricity access rate for the latest year available in the dataset. The histogram is particularly useful for visualising the distribution of a continuous variable. 
 
+In this case, the histogram shows that a large number of countries have electricity access rates close to 100%. This is indicated by the tall bar on the right, representing countries with nearly full electricity access for their populations. 
+
+Also, by identifying countries with lower electricity access rates helps pinpoint regions that may require targeted interventions to improve infrastructure and energy distribution.
+```{r}
 # Plot histogram of electricity access rate
 ggplot(latest_data, aes(x = Electricity_Access_Rate)) +
   geom_histogram(binwidth = 0.05, fill = "#76afda", color = "black") +
@@ -226,7 +263,6 @@ ggplot(latest_data, aes(x = Electricity_Access_Rate)) +
     x = "Electricity Access Rate",
     y = "Frequency"
   )
-
 
 # Summarize electricity access rate by year
 yearly_summary <- selected_data %>%
@@ -251,6 +287,7 @@ plot_summary <- function(data) {
       legend.background = element_rect(fill = "transparent")  # Make legend background transparent
     )
   
+  # Print chart
   print(p)
   
   # Save chart as a PNG file
@@ -258,7 +295,14 @@ plot_summary <- function(data) {
 }
 
 plot_summary(yearly_summary)
+```
+## Choice of Line Chart
+I chose to do a line chart above because it is well-suited for visualizing changes in a variable over time. The chart reveals that the electricity access rate has shown a steady upward trend, indicating improved access to electricity globally.
+The disparity in trends implies that efforts to expand clean fuel access might need more attention compared to electricity access, particularly as clean fuel access is essential for health and environmental reasons. 
 
+## Scatter Plot Analysis
+To better visualise the top and bottom countries in terms of clean fuels and electricity access rates, I created scatter plots, which are effective for displaying individual data points and allow for easy comparison of specific metrics across categories—in this case, countries. This specific breakdown enables a direct comparison, making it easy to pinpoint countries that have achieved near-universal access and those that face critical shortages.
+```{r}
 # Define function to plot scatter plot
 plot_scatter <- function(data, x_column, y_column, top_n_countries = 10, width = 15, height = 8, output_file = NULL, ascending = FALSE) {
   if (ascending) {
@@ -306,7 +350,10 @@ plot_scatter(latest_data, "Country", "Clean_Fuels_Access_Rate", top_n_countries 
 plot_scatter(latest_data, "Country", "Electricity_Access_Rate", top_n_countries = 50, output_file = "electricity_top_50.png")
 plot_scatter(latest_data, "Country", "Clean_Fuels_Access_Rate", top_n_countries = 50, ascending = TRUE, output_file = "clean_fuels_bottom_50.png")
 plot_scatter(latest_data, "Country", "Electricity_Access_Rate", top_n_countries = 50, ascending = TRUE, output_file = "electricity_bottom_50.png")
-
+```
+## Bar Chart Visualisation of Access Rates
+I developed a function called plot_bar() to visualize the top 10 countries with both the highest and lowest access rates for electricity and clean fuels. The bar chart format is ideal for comparing categories, making me easy to rank countries by their access rates and clearly display differences between them. This focused comparison provides a visual hierarchy, helping me to identify countries that lead in energy access and those with critical gaps, supporting targeted policy interventions to bridge these disparities.
+```{r}
 # Visualize the top 10 countries with the highest electricity access rate
 plot_bar <- function(data, x_column, y_column, top_n_countries = 10, width = 15, height = 8, output_file = NULL, ascending = FALSE) {
   if (ascending) {
@@ -348,4 +395,14 @@ plot_bar(latest_data, "Country", "Clean_Fuels_Access_Rate", top_n_countries = 10
 plot_bar(latest_data, "Country", "Electricity_Access_Rate", top_n_countries = 10)  # Highest electricity access rate countries
 plot_bar(latest_data, "Country", "Clean_Fuels_Access_Rate", top_n_countries = 10, ascending = TRUE)  # Lowest clean fuel access rate countries
 plot_bar(latest_data, "Country", "Electricity_Access_Rate", top_n_countries = 10, ascending = TRUE)  # Lowest electricity access rate countries
+```
+## Critical Engagement with AI
+Throughout my SOCS0100 project, I utilised ChatGPT as a collaborative tool to refine data wrangling and visualisation code. Its assistance was instrumental in simplifying complex coding challenges, often offering insightful suggestions that made the code more efficient and readable.
 
+For example, when dealing with the raw data, I was initially unsure whether to delete rows with irrelevant or missing values or to impute them using mean or median. After some conversations with ChatGPT, its guidance helped me decide on the best approach, resulting in a cleaner workflow.
+
+In evaluating ChatGPT’s contributions, I found its value lay in iterative code improvement and proposing innovative solutions. However, its limitations became apparent in understanding the specific context of my energy dataset or handling nuanced tasks that required human intuition. Despite these challenges, it spurred me to think more deeply about my code’s structure and logic, ultimately making my approach more robust.
+
+Reflecting on this experience, ChatGPT positively impacted my assessment by providing prompt support during moments of uncertainty, which boosted my confidence in tackling complex aspects of the project. Its involvement led to a more streamlined approach to data analysis, contributing meaningfully to my overall learning experience at SOCS0100 course.
+
+## Words count: 1498

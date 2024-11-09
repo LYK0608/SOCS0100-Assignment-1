@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="YIKE LI">
+
+<title>SOCS0100_Report_1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="SOCS0100_Report_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="SOCS0100_Report_1_files/libs/quarto-html/quarto.js"></script>
+<script src="SOCS0100_Report_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="SOCS0100_Report_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="SOCS0100_Report_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="SOCS0100_Report_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="SOCS0100_Report_1_files/libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="SOCS0100_Report_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="SOCS0100_Report_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="SOCS0100_Report_1_files/libs/bootstrap/bootstrap-677b520d69fcc55ab41b4b425631e74d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SOCS0100_Report_1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>YIKE LI </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This report is my first assignment for my SOCS0100 course as a UCL BASc student. I investigated global disparities in energy and clean fuel access using data from the World Bank. Key variables in the dataset include “Entity” (representing the country or region), “Year,” “Number of people with access to electricity,” “Number of people without access to electricity,” “Number of people using clean fuels for cooking,” and “Number of people without clean fuels for cooking.”</p>
+<p>By leveraging statistical and visualisation skills of data wrangling, analysis, and visualisation I learnt, I aim to highlightand visualise the differences in energy availability and identify trends that could inform targeted interventions and policy decisions.</p>
+</section>
+<section id="rationale-behind-my-selection-of-this-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="rationale-behind-my-selection-of-this-dataset">Rationale Behind My selection of this Dataset</h2>
+<p>I chose this dataset on energy and clean fuel access because it is critical from a social science perspective as it directly relates to fundamental issues of social equity and development. In specific, energy access is a key determinant of socio-economic well-being, impacting health, education, and economic opportunities. Also, the access of clean fuels and electricity in underdeveloped regions have always been unappreciated, therefore, my analysis is significant in understanding how uneven access to energy perpetuates poverty and affects sustainable development, thereby contributing to informed policy discussions on bridging these global disparities.</p>
+</section>
+<section id="setting-up-the-environment" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-environment">Setting Up the Environment</h2>
+<p>To begin the analysis, I first set the working directory to a folder on my desktop, ensuring all file-related commands would default to this location. Fun fact: I use the alias “felix” as my computer name (and for coffee orders at Starbucks).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/felixli/Desktop/SOCS0100-Assignment-1"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"pacman"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: pacman</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  tidyverse,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  kableExtra, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  flextable,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  glue,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  ggplot2</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-data">Import Data</h2>
+<p>I import the CSV file data named “Number of people with and without energy access (OWID based on World Bank, 2021).csv” into R, storing it in the energy_access_data variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>energy_access_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Number of people with and without energy access (OWID based on World Bank, 2021).csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
+<p>I tried to load the skimr, dplyr, and tidyr libraries to facilitate data exploration, manipulation, and give myself a clearer idea of what this data is about.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)  <span class="co"># Load the data exploration package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(energy_access_data)  <span class="co"># Get data overview</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">energy_access_data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">6582</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Entity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">264</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">2006.51</td>
+<td style="text-align: right;">7.96</td>
+<td style="text-align: right;">1990.0</td>
+<td style="text-align: right;">2000.00</td>
+<td style="text-align: right;">2007.00</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">▃▆▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number.of.people.with.access.to.electricity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">199266381.66</td>
+<td style="text-align: right;">679348377.02</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">623066.91</td>
+<td style="text-align: right;">5392424.50</td>
+<td style="text-align: right;">45415305</td>
+<td style="text-align: right;">6912458804</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number.of.people.without.access.to.electricity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">50197598.02</td>
+<td style="text-align: right;">173187128.90</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">64778.72</td>
+<td style="text-align: right;">7782365</td>
+<td style="text-align: right;">1627944246</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_with_clean_fuels_cooking</td>
+<td style="text-align: right;">2661</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">158546598.14</td>
+<td style="text-align: right;">475491566.65</td>
+<td style="text-align: right;">2031.8</td>
+<td style="text-align: right;">491476.85</td>
+<td style="text-align: right;">5123887.46</td>
+<td style="text-align: right;">47660953</td>
+<td style="text-align: right;">4405739095</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">number_without_clean_fuels_cooking</td>
+<td style="text-align: right;">2661</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">153680861.62</td>
+<td style="text-align: right;">475064567.64</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">94237.27</td>
+<td style="text-align: right;">1856184.88</td>
+<td style="text-align: right;">19487483</td>
+<td style="text-align: right;">3093769825</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(energy_access_data)  <span class="co"># Display data structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   6582 obs. of  6 variables:
+ $ Entity                                        : chr  "Afghanistan" "Afghanistan" "Afghanistan" "Afghanistan" ...
+ $ Year                                          : int  2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 ...
+ $ Number.of.people.with.access.to.electricity   : num  5719689 7427679 9187518 11754247 12925510 ...
+ $ Number.of.people.without.access.to.electricity: num  19934585 19005379 17913024 15968034 15469296 ...
+ $ number_with_clean_fuels_cooking               : num  3460762 3914736 4333377 4834766 5349581 ...
+ $ number_without_clean_fuels_cooking            : num  22193512 22518322 22767165 22887515 23045225 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(energy_access_data)  <span class="co"># Show the first few rows of data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Entity Year Number.of.people.with.access.to.electricity
+1 Afghanistan 2005                                     5719689
+2 Afghanistan 2006                                     7427679
+3 Afghanistan 2007                                     9187518
+4 Afghanistan 2008                                    11754247
+5 Afghanistan 2009                                    12925510
+6 Afghanistan 2010                                    12462213
+  Number.of.people.without.access.to.electricity
+1                                       19934585
+2                                       19005379
+3                                       17913024
+4                                       15968034
+5                                       15469296
+6                                       16723298
+  number_with_clean_fuels_cooking number_without_clean_fuels_cooking
+1                         3460762                           22193512
+2                         3914736                           22518322
+3                         4333377                           22767165
+4                         4834766                           22887515
+5                         5349581                           23045225
+6                         6035564                           23149947</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(energy_access_data)  <span class="co"># Overview statistics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Entity               Year      Number.of.people.with.access.to.electricity
+ Length:6582        Min.   :1990   Min.   :         0                         
+ Class :character   1st Qu.:2000   1st Qu.:    623067                         
+ Mode  :character   Median :2007   Median :   5392424                         
+                    Mean   :2007   Mean   : 199266382                         
+                    3rd Qu.:2013   3rd Qu.:  45415305                         
+                    Max.   :2019   Max.   :6912458804                         
+                                                                              
+ Number.of.people.without.access.to.electricity number_with_clean_fuels_cooking
+ Min.   :         0                             Min.   :      2032             
+ 1st Qu.:         0                             1st Qu.:    491477             
+ Median :     64779                             Median :   5123887             
+ Mean   :  50197598                             Mean   : 158546598             
+ 3rd Qu.:   7782365                             3rd Qu.:  47660953             
+ Max.   :1627944246                             Max.   :4405739095             
+                                                NA's   :2661                   
+ number_without_clean_fuels_cooking
+ Min.   :         0                
+ 1st Qu.:     94237                
+ Median :   1856185                
+ Mean   : 153680862                
+ 3rd Qu.:  19487483                
+ Max.   :3093769825                
+ NA's   :2661                      </code></pre>
+</div>
+</div>
+</section>
+<section id="interpretation-of-the-descriptive-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-of-the-descriptive-statistics">Interpretation of the Descriptive Statistics</h2>
+<p>The descriptive statistics reveal stark disparities in global energy access. Electricity access ranges widely, with some regions having near-universal coverage (up to 6.9 billion people), while others have very limited access, as indicated by the median of around 5.4 million but a skewed mean of 199 million. Similarly, clean fuel access shows substantial variability, with a median of about 5.1 million people with access but a mean of 158 million, indicating a few regions with very high access skewing the average.</p>
+<p>However, this result is not reliable because I have not fully cleaned the data. I will analyse it again in the following sections when I’ve fully done the data cleaning part.</p>
+</section>
+<section id="check-for-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-missing-values">Check for Missing Values</h2>
+<p>In this section, I checked the dataset for missing values, because I thought there had to be some tricky data that required me to do something about it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> energy_access_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.))))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Number of missing values in each column:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Number of missing values in each column:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(missing_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Entity Year Number.of.people.with.access.to.electricity
+1      0    0                                           0
+  Number.of.people.without.access.to.electricity
+1                                              0
+  number_with_clean_fuels_cooking number_without_clean_fuels_cooking
+1                            2661                               2661</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(energy_access_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">energy_access_data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">6582</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 13%">
+<col style="width: 19%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 8%">
+<col style="width: 12%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Entity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">264</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 6%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">2006.51</td>
+<td style="text-align: right;">7.96</td>
+<td style="text-align: right;">1990.0</td>
+<td style="text-align: right;">2000.00</td>
+<td style="text-align: right;">2007.00</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: left;">▃▆▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number.of.people.with.access.to.electricity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">199266381.66</td>
+<td style="text-align: right;">679348377.02</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">623066.91</td>
+<td style="text-align: right;">5392424.50</td>
+<td style="text-align: right;">45415305</td>
+<td style="text-align: right;">6912458804</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number.of.people.without.access.to.electricity</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">50197598.02</td>
+<td style="text-align: right;">173187128.90</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">64778.72</td>
+<td style="text-align: right;">7782365</td>
+<td style="text-align: right;">1627944246</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_with_clean_fuels_cooking</td>
+<td style="text-align: right;">2661</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">158546598.14</td>
+<td style="text-align: right;">475491566.65</td>
+<td style="text-align: right;">2031.8</td>
+<td style="text-align: right;">491476.85</td>
+<td style="text-align: right;">5123887.46</td>
+<td style="text-align: right;">47660953</td>
+<td style="text-align: right;">4405739095</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">number_without_clean_fuels_cooking</td>
+<td style="text-align: right;">2661</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">153680861.62</td>
+<td style="text-align: right;">475064567.64</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">94237.27</td>
+<td style="text-align: right;">1856184.88</td>
+<td style="text-align: right;">19487483</td>
+<td style="text-align: right;">3093769825</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="data-types-and-unique-value-counts" class="level2">
+<h2 class="anchored" data-anchor-id="data-types-and-unique-value-counts">Data Types and Unique Value Counts</h2>
+<p>Next, I wanted to confirm the data types of all columns and determine how diverse the entries were within each column. This helps reveal whether some columns need to be converted to other data types and identifies any inconsistencies or outliers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data_types <span class="ot">&lt;-</span> energy_access_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">class</span>(.)))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>unique_counts <span class="ot">&lt;-</span> energy_access_data <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">length</span>(<span class="fu">unique</span>(.))))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Data types for each column:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Data types for each column:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data_types)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Entity    Year Number.of.people.with.access.to.electricity
+1 character integer                                     numeric
+  Number.of.people.without.access.to.electricity
+1                                        numeric
+  number_with_clean_fuels_cooking number_without_clean_fuels_cooking
+1                         numeric                            numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Unique value count for each column:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Unique value count for each column:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(unique_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Entity Year Number.of.people.with.access.to.electricity
+1    264   30                                        6515
+  Number.of.people.without.access.to.electricity
+1                                           3947
+  number_with_clean_fuels_cooking number_without_clean_fuels_cooking
+1                            3887                               3243</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>unique_entities <span class="ot">&lt;-</span> <span class="fu">unique</span>(energy_access_data<span class="sc">$</span>Entity)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(unique_entities)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "Afghanistan"                                       
+  [2] "Africa Eastern and Southern"                       
+  [3] "Africa Western and Central"                        
+  [4] "Albania"                                           
+  [5] "Algeria"                                           
+  [6] "Andorra"                                           
+  [7] "Angola"                                            
+  [8] "Antigua and Barbuda"                               
+  [9] "Arab World"                                        
+ [10] "Argentina"                                         
+ [11] "Armenia"                                           
+ [12] "Aruba"                                             
+ [13] "Australia"                                         
+ [14] "Austria"                                           
+ [15] "Azerbaijan"                                        
+ [16] "Bahamas"                                           
+ [17] "Bahrain"                                           
+ [18] "Bangladesh"                                        
+ [19] "Barbados"                                          
+ [20] "Belarus"                                           
+ [21] "Belgium"                                           
+ [22] "Belize"                                            
+ [23] "Benin"                                             
+ [24] "Bermuda"                                           
+ [25] "Bhutan"                                            
+ [26] "Bolivia"                                           
+ [27] "Bosnia and Herzegovina"                            
+ [28] "Botswana"                                          
+ [29] "Brazil"                                            
+ [30] "British Virgin Islands"                            
+ [31] "Brunei"                                            
+ [32] "Bulgaria"                                          
+ [33] "Burkina Faso"                                      
+ [34] "Burundi"                                           
+ [35] "Cambodia"                                          
+ [36] "Cameroon"                                          
+ [37] "Canada"                                            
+ [38] "Cape Verde"                                        
+ [39] "Caribbean Small States"                            
+ [40] "Cayman Islands"                                    
+ [41] "Central African Republic"                          
+ [42] "Central Europe and the Baltics"                    
+ [43] "Chad"                                              
+ [44] "Channel Islands"                                   
+ [45] "Chile"                                             
+ [46] "China"                                             
+ [47] "Colombia"                                          
+ [48] "Comoros"                                           
+ [49] "Congo"                                             
+ [50] "Costa Rica"                                        
+ [51] "Cote d'Ivoire"                                     
+ [52] "Croatia"                                           
+ [53] "Cuba"                                              
+ [54] "Curacao"                                           
+ [55] "Cyprus"                                            
+ [56] "Czechia"                                           
+ [57] "Democratic Republic of Congo"                      
+ [58] "Denmark"                                           
+ [59] "Djibouti"                                          
+ [60] "Dominica"                                          
+ [61] "Dominican Republic"                                
+ [62] "Early-demographic dividend"                        
+ [63] "East Asia &amp; Pacific"                               
+ [64] "East Asia &amp; Pacific (excluding high income)"       
+ [65] "East Asia &amp; Pacific (IDA &amp; IBRD)"                  
+ [66] "Ecuador"                                           
+ [67] "Egypt"                                             
+ [68] "El Salvador"                                       
+ [69] "Equatorial Guinea"                                 
+ [70] "Eritrea"                                           
+ [71] "Estonia"                                           
+ [72] "Eswatini"                                          
+ [73] "Ethiopia"                                          
+ [74] "Euro area"                                         
+ [75] "Europe &amp; Central Asia"                             
+ [76] "Europe &amp; Central Asia (excluding high income)"     
+ [77] "Europe &amp; Central Asia (IDA &amp; IBRD)"                
+ [78] "European Union"                                    
+ [79] "Faeroe Islands"                                    
+ [80] "Fiji"                                              
+ [81] "Finland"                                           
+ [82] "Fragile and conflict affected situations"          
+ [83] "France"                                            
+ [84] "French Polynesia"                                  
+ [85] "Gabon"                                             
+ [86] "Gambia"                                            
+ [87] "Georgia"                                           
+ [88] "Germany"                                           
+ [89] "Ghana"                                             
+ [90] "Gibraltar"                                         
+ [91] "Greece"                                            
+ [92] "Greenland"                                         
+ [93] "Grenada"                                           
+ [94] "Guam"                                              
+ [95] "Guatemala"                                         
+ [96] "Guinea"                                            
+ [97] "Guinea-Bissau"                                     
+ [98] "Guyana"                                            
+ [99] "Haiti"                                             
+[100] "Heavily indebted poor countries (HIPC)"            
+[101] "High income"                                       
+[102] "Honduras"                                          
+[103] "Hong Kong"                                         
+[104] "Hungary"                                           
+[105] "IBRD only"                                         
+[106] "Iceland"                                           
+[107] "IDA &amp; IBRD total"                                  
+[108] "IDA blend"                                         
+[109] "IDA only"                                          
+[110] "IDA total"                                         
+[111] "India"                                             
+[112] "Indonesia"                                         
+[113] "Iran"                                              
+[114] "Iraq"                                              
+[115] "Ireland"                                           
+[116] "Isle of Man"                                       
+[117] "Israel"                                            
+[118] "Italy"                                             
+[119] "Jamaica"                                           
+[120] "Japan"                                             
+[121] "Jordan"                                            
+[122] "Kazakhstan"                                        
+[123] "Kenya"                                             
+[124] "Kiribati"                                          
+[125] "Kosovo"                                            
+[126] "Kuwait"                                            
+[127] "Kyrgyzstan"                                        
+[128] "Laos"                                              
+[129] "Late-demographic dividend"                         
+[130] "Latin America &amp; Caribbean"                         
+[131] "Latin America &amp; Caribbean (excluding high income)" 
+[132] "Latin America &amp; Caribbean (IDA &amp; IBRD)"            
+[133] "Latvia"                                            
+[134] "Least developed countries: UN classification"      
+[135] "Lebanon"                                           
+[136] "Lesotho"                                           
+[137] "Liberia"                                           
+[138] "Libya"                                             
+[139] "Liechtenstein"                                     
+[140] "Lithuania"                                         
+[141] "Low &amp; middle income"                               
+[142] "Low income"                                        
+[143] "Lower middle income"                               
+[144] "Luxembourg"                                        
+[145] "Macao"                                             
+[146] "Madagascar"                                        
+[147] "Malawi"                                            
+[148] "Malaysia"                                          
+[149] "Maldives"                                          
+[150] "Mali"                                              
+[151] "Malta"                                             
+[152] "Marshall Islands"                                  
+[153] "Mauritania"                                        
+[154] "Mauritius"                                         
+[155] "Mexico"                                            
+[156] "Micronesia (country)"                              
+[157] "Middle East &amp; North Africa"                        
+[158] "Middle East &amp; North Africa (excluding high income)"
+[159] "Middle East &amp; North Africa (IDA &amp; IBRD)"           
+[160] "Middle income"                                     
+[161] "Moldova"                                           
+[162] "Monaco"                                            
+[163] "Mongolia"                                          
+[164] "Montenegro"                                        
+[165] "Morocco"                                           
+[166] "Mozambique"                                        
+[167] "Myanmar"                                           
+[168] "Namibia"                                           
+[169] "Nauru"                                             
+[170] "Nepal"                                             
+[171] "Netherlands"                                       
+[172] "New Caledonia"                                     
+[173] "New Zealand"                                       
+[174] "Nicaragua"                                         
+[175] "Niger"                                             
+[176] "Nigeria"                                           
+[177] "North America"                                     
+[178] "North Korea"                                       
+[179] "North Macedonia"                                   
+[180] "Northern Mariana Islands"                          
+[181] "Norway"                                            
+[182] "OECD members"                                      
+[183] "Oman"                                              
+[184] "Other small states"                                
+[185] "Pacific island small states"                       
+[186] "Pakistan"                                          
+[187] "Palau"                                             
+[188] "Palestine"                                         
+[189] "Panama"                                            
+[190] "Papua New Guinea"                                  
+[191] "Paraguay"                                          
+[192] "Peru"                                              
+[193] "Philippines"                                       
+[194] "Poland"                                            
+[195] "Portugal"                                          
+[196] "Post-demographic dividend"                         
+[197] "Pre-demographic dividend"                          
+[198] "Puerto Rico"                                       
+[199] "Qatar"                                             
+[200] "Romania"                                           
+[201] "Russia"                                            
+[202] "Rwanda"                                            
+[203] "Saint Kitts and Nevis"                             
+[204] "Saint Lucia"                                       
+[205] "Saint Martin (French part)"                        
+[206] "Saint Vincent and the Grenadines"                  
+[207] "Samoa"                                             
+[208] "San Marino"                                        
+[209] "Sao Tome and Principe"                             
+[210] "Saudi Arabia"                                      
+[211] "Senegal"                                           
+[212] "Serbia"                                            
+[213] "Seychelles"                                        
+[214] "Sierra Leone"                                      
+[215] "Singapore"                                         
+[216] "Sint Maarten (Dutch part)"                         
+[217] "Slovakia"                                          
+[218] "Slovenia"                                          
+[219] "Small states"                                      
+[220] "Solomon Islands"                                   
+[221] "Somalia"                                           
+[222] "South Africa"                                      
+[223] "South Asia"                                        
+[224] "South Asia (IDA &amp; IBRD)"                           
+[225] "South Korea"                                       
+[226] "South Sudan"                                       
+[227] "Spain"                                             
+[228] "Sri Lanka"                                         
+[229] "Sub-Saharan Africa"                                
+[230] "Sub-Saharan Africa (excluding high income)"        
+[231] "Sub-Saharan Africa (IDA &amp; IBRD)"                   
+[232] "Sudan"                                             
+[233] "Suriname"                                          
+[234] "Sweden"                                            
+[235] "Switzerland"                                       
+[236] "Syria"                                             
+[237] "Tajikistan"                                        
+[238] "Tanzania"                                          
+[239] "Thailand"                                          
+[240] "Timor"                                             
+[241] "Togo"                                              
+[242] "Tonga"                                             
+[243] "Trinidad and Tobago"                               
+[244] "Tunisia"                                           
+[245] "Turkey"                                            
+[246] "Turkmenistan"                                      
+[247] "Turks and Caicos Islands"                          
+[248] "Tuvalu"                                            
+[249] "Uganda"                                            
+[250] "Ukraine"                                           
+[251] "United Arab Emirates"                              
+[252] "United Kingdom"                                    
+[253] "United States"                                     
+[254] "United States Virgin Islands"                      
+[255] "Upper middle income"                               
+[256] "Uruguay"                                           
+[257] "Uzbekistan"                                        
+[258] "Vanuatu"                                           
+[259] "Venezuela"                                         
+[260] "Vietnam"                                           
+[261] "World"                                             
+[262] "Yemen"                                             
+[263] "Zambia"                                            
+[264] "Zimbabwe"                                          </code></pre>
+</div>
+</div>
+</section>
+<section id="removing-unnecessary-regions-and-international-organizations" class="level2">
+<h2 class="anchored" data-anchor-id="removing-unnecessary-regions-and-international-organizations">Removing Unnecessary Regions and International Organizations</h2>
+<p>To focus my analysis solely on individual countries, I filterted out entities that were not representative of distinct national units. These unnecessary entities included aggregate regions, demographic groupings, and international organisations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>filter_entities <span class="ot">&lt;-</span> <span class="cf">function</span>(data, entities_to_remove) {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  filtered_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>Entity <span class="sc">%in%</span> entities_to_remove)  <span class="co"># Filter out unselected entities</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(filtered_data)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>entities_to_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Africa Eastern and Southern"</span>, <span class="st">"Africa Western and Central"</span>, <span class="st">"Arab World"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Caribbean Small States"</span>, <span class="st">"Central Europe and the Baltics"</span>, <span class="st">"Early-demographic dividend"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"East Asia &amp; Pacific"</span>, <span class="st">"East Asia &amp; Pacific (excluding high income)"</span>, <span class="st">"East Asia &amp; Pacific (IDA &amp; IBRD)"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Euro area"</span>, <span class="st">"Europe &amp; Central Asia"</span>, <span class="st">"Europe &amp; Central Asia (excluding high income)"</span>, </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Europe &amp; Central Asia (IDA &amp; IBRD)"</span>, <span class="st">"European Union"</span>, <span class="st">"Fragile and conflict affected situations"</span>, </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Heavily indebted poor countries (HIPC)"</span>, <span class="st">"High income"</span>, <span class="st">"IBRD only"</span>, <span class="st">"IDA &amp; IBRD total"</span>, </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"IDA blend"</span>, <span class="st">"IDA only"</span>, <span class="st">"IDA total"</span>, <span class="st">"Late-demographic dividend"</span>, <span class="st">"Latin America &amp; Caribbean"</span>, </span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Latin America &amp; Caribbean (excluding high income)"</span>, <span class="st">"Latin America &amp; Caribbean (IDA &amp; IBRD)"</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Least developed countries: UN classification"</span>, <span class="st">"Low &amp; middle income"</span>, <span class="st">"Low income"</span>, <span class="st">"Lower middle income"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Middle East &amp; North Africa"</span>, <span class="st">"Middle East &amp; North Africa (excluding high income)"</span>, </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Middle East &amp; North Africa (IDA &amp; IBRD)"</span>, <span class="st">"Middle income"</span>, <span class="st">"North America"</span>, <span class="st">"OECD members"</span>, </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Other small states"</span>, <span class="st">"Pacific island small states"</span>, <span class="st">"Post-demographic dividend"</span>, </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pre-demographic dividend"</span>, <span class="st">"Small states"</span>, <span class="st">"South Asia"</span>, <span class="st">"South Asia (IDA &amp; IBRD)"</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sub-Saharan Africa"</span>, <span class="st">"Sub-Saharan Africa (excluding high income)"</span>, <span class="st">"Sub-Saharan Africa (IDA &amp; IBRD)"</span>,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Upper middle income"</span>, <span class="st">"World"</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> <span class="fu">filter_entities</span>(energy_access_data, entities_to_remove)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculating-descriptive-statistics-for-numeric-columns-again-with-filtered-data" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-descriptive-statistics-for-numeric-columns-again-with-filtered-data">Calculating Descriptive Statistics for Numeric Columns Again with Filtered Data</h2>
+<p>To better understand the numeric variables in my dataset, I defined a function called calculate_statistics(), which calculates basic descriptive statistics for each numeric column. These statistics include the mean, standard deviation, minimum, maximum, and median.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>calculate_statistics <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  numeric_columns <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  stats_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(numeric_columns)) {</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    filtered_col <span class="ot">&lt;-</span> numeric_columns[[col]] <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span> .[. <span class="sc">!=</span> <span class="dv">0</span>]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    stats <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean =</span> <span class="fu">mean</span>(filtered_col),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd =</span> <span class="fu">sd</span>(filtered_col),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">min =</span> <span class="fu">min</span>(filtered_col),</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">max =</span> <span class="fu">max</span>(filtered_col),</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">median =</span> <span class="fu">median</span>(filtered_col)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    stats_list[[col]] <span class="ot">&lt;-</span> stats</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(stats_list)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">calculate_statistics</span>(filtered_data)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Number.of.people.with.access.to.electricity
+$Number.of.people.with.access.to.electricity$mean
+[1] 25048930
+
+$Number.of.people.with.access.to.electricity$sd
+[1] 105605782
+
+$Number.of.people.with.access.to.electricity$min
+[1] 593.6253
+
+$Number.of.people.with.access.to.electricity$max
+[1] 1397715000
+
+$Number.of.people.with.access.to.electricity$median
+[1] 3617748
+
+
+$Number.of.people.without.access.to.electricity
+$Number.of.people.without.access.to.electricity$mean
+[1] 9925673
+
+$Number.of.people.without.access.to.electricity$sd
+[1] 35955324
+
+$Number.of.people.without.access.to.electricity$min
+[1] 0.2644464
+
+$Number.of.people.without.access.to.electricity$max
+[1] 483679750
+
+$Number.of.people.without.access.to.electricity$median
+[1] 1164121
+
+
+$number_with_clean_fuels_cooking
+$number_with_clean_fuels_cooking$mean
+[1] 19701961
+
+$number_with_clean_fuels_cooking$sd
+[1] 67260678
+
+$number_with_clean_fuels_cooking$min
+[1] 2031.797
+
+$number_with_clean_fuels_cooking$max
+[1] 816996879
+
+$number_with_clean_fuels_cooking$median
+[1] 2738104
+
+
+$number_without_clean_fuels_cooking
+$number_without_clean_fuels_cooking$mean
+[1] 20303482
+
+$number_without_clean_fuels_cooking$sd
+[1] 86351296
+
+$number_without_clean_fuels_cooking$min
+[1] 908.0958
+
+$number_without_clean_fuels_cooking$max
+[1] 823305194
+
+$number_without_clean_fuels_cooking$median
+[1] 1764165</code></pre>
+</div>
+</div>
+</section>
+<section id="handling-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="handling-missing-values">Handling Missing Values</h2>
+<p>This part took me a few days. But luckily I made it in the end.</p>
+<p>I implemented a function called handle_missing_values() to handle missing, zero, and empty values in the dataset. By automating the replacement of missing values with calculated means or default values, this function allows me to make data more robust but also maintained consistency across different steps of the analysis. It saved time compared to manually addressing each instance of missing data and guaranteed that the same logic was applied throughout.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>handle_missing_values <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  grouped_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Entity)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  means <span class="ot">&lt;-</span> grouped_data <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> <span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  clean_data <span class="ot">&lt;-</span> grouped_data <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> {</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      col_name <span class="ot">&lt;-</span> <span class="fu">cur_column</span>()</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.) <span class="sc">|</span> . <span class="sc">==</span> <span class="dv">0</span>, means[[col_name]][<span class="fu">match</span>(Entity, means<span class="sc">$</span>Entity)], .)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    })) <span class="sc">%&gt;%</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(.) <span class="sc">|</span> <span class="fu">trimws</span>(.) <span class="sc">==</span> <span class="st">""</span>, <span class="st">"Default Value"</span>, .))) </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(clean_data)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>filtered_data_no_na <span class="ot">&lt;-</span> <span class="fu">handle_missing_values</span>(filtered_data)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered_data_no_na) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 6
+# Groups:   Entity [1]
+  Entity       Year Number.of.people.with.access.to.ele…¹ Number.of.people.wit…²
+  &lt;chr&gt;       &lt;int&gt;                                 &lt;dbl&gt;                  &lt;dbl&gt;
+1 Afghanistan  2005                              5719689.              19934585.
+2 Afghanistan  2006                              7427679.              19005379.
+3 Afghanistan  2007                              9187518.              17913024.
+4 Afghanistan  2008                             11754247.              15968034.
+5 Afghanistan  2009                             12925510.              15469296.
+6 Afghanistan  2010                             12462213.              16723298.
+# ℹ abbreviated names: ¹​Number.of.people.with.access.to.electricity,
+#   ²​Number.of.people.without.access.to.electricity
+# ℹ 2 more variables: number_with_clean_fuels_cooking &lt;dbl&gt;,
+#   number_without_clean_fuels_cooking &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="secondary-data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="secondary-data-cleaning">Secondary Data Cleaning</h2>
+<p>To further ensure data quality, I created a function called filter_data() to perform additional cleaning steps beyond filling missing and zero values.</p>
+<p>By encapsulating this process in a function, I ensured that these specific filtering criteria could be systematically applied whenever necessary, which improved both the efficiency and reproducibility of my workflow.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>filter_data <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(data)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data[<span class="fu">rowSums</span>(data <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">==</span> <span class="dv">0</span>, ]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data[<span class="fu">rowSums</span>(data <span class="sc">&lt;</span> <span class="dv">100</span>) <span class="sc">==</span> <span class="dv">0</span>, ]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>filtered_data_no_na <span class="ot">&lt;-</span> <span class="fu">filter_data</span>(filtered_data_no_na)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">&lt;-</span> <span class="st">"cleaned_data.csv"</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(filtered_data_no_na, <span class="at">file =</span> output_file, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="descriptive-statistics-calculation" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-statistics-calculation">Descriptive Statistics Calculation</h2>
+<p>In this step, I calculated key descriptive statistics for all numeric columns in the dataset. These statistics include: Mean, Median, Standard Deviation (sd), Minimum (min) and Maximum (max). I used na.rm = TRUE to ensure that any missing values are ignored during these calculations, making the statistics more accurate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>descriptive_stats <span class="ot">&lt;-</span> filtered_data_no_na <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="fu">list</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="sc">~</span> <span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="sc">~</span> <span class="fu">median</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="sc">~</span> <span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="sc">~</span> <span class="fu">min</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="sc">~</span> <span class="fu">max</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  )))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Descriptive statistics for numeric columns:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Descriptive statistics for numeric columns:"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(descriptive_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 139 × 26
+   Entity Year_mean Year_median Year_sd Year_min Year_max Number.of.people.wit…¹
+   &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;                  &lt;dbl&gt;
+ 1 Afgha…     2012        2012     4.47     2005     2019              20976776.
+ 2 Alban…     2010.       2010.    5.92     2000     2019               2947902.
+ 3 Alger…     2014.       2014.    3.61     2008     2019              38357564.
+ 4 Angola     2010        2010     5.63     2001     2019               8608462.
+ 5 Antig…     2009.       2009     5.72     2000     2019                 85423.
+ 6 Argen…     2010.       2010.    5.92     2000     2019              40071238.
+ 7 Armen…     2010.       2010.    5.92     2000     2019               2934864.
+ 8 Azerb…     2009        2009     6.20     1999     2019               8901823.
+ 9 Bangl…     2005        2005     8.51     1991     2019              67375312.
+10 Belize     2005        2005     8.51     1991     2019                242526.
+# ℹ 129 more rows
+# ℹ abbreviated name: ¹​Number.of.people.with.access.to.electricity_mean
+# ℹ 19 more variables:
+#   Number.of.people.with.access.to.electricity_median &lt;dbl&gt;,
+#   Number.of.people.with.access.to.electricity_sd &lt;dbl&gt;,
+#   Number.of.people.with.access.to.electricity_min &lt;dbl&gt;,
+#   Number.of.people.with.access.to.electricity_max &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="selecting-and-renaming-columns" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-and-renaming-columns">Selecting and Renaming Columns</h2>
+<p>In this section, I refined the dataset by selecting the columns that are relevant for analysis, specifically focusing on variables related to energy and clean fuels access. I then renamed these columns to more concise names for clarity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>selected_data <span class="ot">&lt;-</span> filtered_data_no_na <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    Entity, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    Year, </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    Number.of.people.with.access.to.electricity,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    Number.of.people.without.access.to.electricity,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    number_with_clean_fuels_cooking,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    number_without_clean_fuels_cooking</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Country =</span> Entity,  <span class="co"># Rename to Country</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> Year,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Electricity =</span> Number.of.people.with.access.to.electricity,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">No_Electricity =</span> Number.of.people.without.access.to.electricity,</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Clean_Fuels =</span> number_with_clean_fuels_cooking,</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">No_Clean_Fuels =</span> number_without_clean_fuels_cooking</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="processing-data-reshaping-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="processing-data-reshaping-for-analysis">Processing Data: Reshaping for Analysis</h2>
+<p>Here, I defined a function called process_data to perform additional data manipulation. The function first selects specific variables of interest, and then creates new variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>process_data <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  selected_data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Country, Year, Electricity, No_Electricity, Clean_Fuels, No_Clean_Fuels)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  new_variable_data <span class="ot">&lt;-</span> selected_data <span class="sc">%&gt;%</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Total_Population =</span> Electricity <span class="sc">+</span> No_Electricity)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  reshaped_data <span class="ot">&lt;-</span> new_variable_data <span class="sc">%&gt;%</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> <span class="fu">c</span>(Electricity, No_Electricity, Clean_Fuels, No_Clean_Fuels, Total_Population),</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"Value"</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(reshaped_data)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>reshaped_data<span class="ot">&lt;-</span> <span class="fu">process_data</span>(selected_data)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(reshaped_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+# Groups:   Country [1]
+  Country      Year Variable             Value
+  &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;                &lt;dbl&gt;
+1 Afghanistan  2005 Electricity       5719689.
+2 Afghanistan  2005 No_Electricity   19934585.
+3 Afghanistan  2005 Clean_Fuels       3460762.
+4 Afghanistan  2005 No_Clean_Fuels   22193512.
+5 Afghanistan  2005 Total_Population 25654274.
+6 Afghanistan  2006 Electricity       7427679.</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-access-rates-and-selecting-latest-data" class="level2">
+<h2 class="anchored" data-anchor-id="calculating-access-rates-and-selecting-latest-data">Calculating Access Rates and Selecting Latest Data</h2>
+<p>In this step, I calculated two important metrics: Electricity Access Rate and Clean Fuels Access Rate for each country. These rates are computed as the proportion of people with access to electricity or clean fuels out of the total population, while handling cases where total population or access is zero to prevent division errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate electricity access rate</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>selected_data <span class="ot">&lt;-</span> selected_data <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Electricity_Access_Rate =</span> <span class="fu">if_else</span>((Electricity <span class="sc">+</span> No_Electricity) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> Electricity <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, Electricity <span class="sc">/</span> (Electricity <span class="sc">+</span> No_Electricity)),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Clean_Fuels_Access_Rate =</span> <span class="fu">if_else</span>((Clean_Fuels <span class="sc">+</span> No_Clean_Fuels) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">|</span> Clean_Fuels <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA_real_</span>, Clean_Fuels <span class="sc">/</span> (Clean_Fuels <span class="sc">+</span> No_Clean_Fuels))</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the latest year data for each country</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>latest_data <span class="ot">&lt;-</span> selected_data <span class="sc">%&gt;%</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="fu">max</span>(Year)) <span class="sc">%&gt;%</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(latest_data)  <span class="co"># View the latest year's data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  Country             Year Electricity No_Electricity Clean_Fuels No_Clean_Fuels
+  &lt;chr&gt;              &lt;int&gt;       &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+1 Afghanistan         2019   37166797.        874960.    6814988.      23285536.
+2 Albania             2019    2854191            562.    1767111.       1196140.
+3 Algeria             2019   42837789.        215265.   34709156.       2783123.
+4 Angola              2019   14534714.      17290585.    9748459.      12652342.
+5 Antigua and Barbu…  2019      97115           1043.      83682.          1693.
+6 Argentina           2019   44938712         713466.   38962911.       1167445.
+# ℹ 2 more variables: Electricity_Access_Rate &lt;dbl&gt;,
+#   Clean_Fuels_Access_Rate &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Output cleaned data to a CSV file</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>output_file <span class="ot">&lt;-</span> <span class="st">"cleaned_data_2.csv"</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(latest_data, <span class="at">file =</span> output_file, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualising-access-rates" class="level2">
+<h2 class="anchored" data-anchor-id="visualising-access-rates">Visualising Access Rates</h2>
+<p>To understand the distribution and trends of electricity access rates, I plotted a histogram showing the distribution of electricity access rate for the latest year available in the dataset. The histogram is particularly useful for visualising the distribution of a continuous variable.</p>
+<p>In this case, the histogram shows that a large number of countries have electricity access rates close to 100%. This is indicated by the tall bar on the right, representing countries with nearly full electricity access for their populations.</p>
+<p>Also, by identifying countries with lower electricity access rates helps pinpoint regions that may require targeted interventions to improve infrastructure and energy distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot histogram of electricity access rate</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(latest_data, <span class="fu">aes</span>(<span class="at">x =</span> Electricity_Access_Rate)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">"#76afda"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Electricity Access Rate (Latest Year)"</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Electricity Access Rate"</span>,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize electricity access rate by year</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>yearly_summary <span class="ot">&lt;-</span> selected_data <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_electricity_access_rate =</span> <span class="fu">mean</span>(Electricity_Access_Rate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),  <span class="co"># Calculate mean</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_clean_fuels_access_rate =</span> <span class="fu">mean</span>(Clean_Fuels_Access_Rate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))  <span class="co"># Calculate mean</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(yearly_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 3
+    Year mean_electricity_access_rate mean_clean_fuels_access_rate
+   &lt;int&gt;                        &lt;dbl&gt;                        &lt;dbl&gt;
+ 1  1990                        0.754                        0.711
+ 2  1991                        0.646                        0.616
+ 3  1992                        0.589                        0.570
+ 4  1993                        0.551                        0.507
+ 5  1994                        0.571                        0.522
+ 6  1995                        0.578                        0.511
+ 7  1996                        0.572                        0.488
+ 8  1997                        0.565                        0.471
+ 9  1998                        0.574                        0.470
+10  1999                        0.587                        0.471
+# ℹ 20 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize yearly summary of electricity access rate</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>plot_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use ggplot2 to plot line chart</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_electricity_access_rate, <span class="at">color =</span> <span class="st">"Electricity Access Rate"</span>), <span class="at">linetype =</span> <span class="st">"solid"</span>, <span class="at">size =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_clean_fuels_access_rate, <span class="at">color =</span> <span class="st">"Clean Fuels Access Rate"</span>), <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yearly Summary of Electricity Access Rate and Clean Fuels Access Rate"</span>,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Access Rate (%)"</span>,</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Indicator"</span>) <span class="sc">+</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,  <span class="co"># Place legend at bottom</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"transparent"</span>)  <span class="co"># Make legend background transparent</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print chart</span></span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Save chart as a PNG file</span></span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"yearly_summary_plot.png"</span>, <span class="at">plot =</span> p, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">units =</span> <span class="st">"in"</span>)</span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_summary</span>(yearly_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="choice-of-line-chart" class="level2">
+<h2 class="anchored" data-anchor-id="choice-of-line-chart">Choice of Line Chart</h2>
+<p>I chose to do a line chart above because it is well-suited for visualizing changes in a variable over time. The chart reveals that the electricity access rate has shown a steady upward trend, indicating improved access to electricity globally. The disparity in trends implies that efforts to expand clean fuel access might need more attention compared to electricity access, particularly as clean fuel access is essential for health and environmental reasons.</p>
+</section>
+<section id="scatter-plot-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="scatter-plot-analysis">Scatter Plot Analysis</h2>
+<p>To better visualise the top and bottom countries in terms of clean fuels and electricity access rates, I created scatter plots, which are effective for displaying individual data points and allow for easy comparison of specific metrics across categories—in this case, countries. This specific breakdown enables a direct comparison, making it easy to pinpoint countries that have achieved near-universal access and those that face critical shortages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function to plot scatter plot</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>plot_scatter <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x_column, y_column, <span class="at">top_n_countries =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">output_file =</span> <span class="cn">NULL</span>, <span class="at">ascending =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (ascending) {</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column)) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">head</span>(top_n_countries)  <span class="co"># Sort in ascending order</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column))) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">head</span>(top_n_countries)  <span class="co"># Sort in descending order</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(x_column), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(y_column))) <span class="sc">+</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span>  <span class="co"># Plot scatter plot</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column), <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>) <span class="sc">+</span>  <span class="co"># Add data labels</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste</span>(y_column, <span class="st">"by"</span>, x_column, <span class="cf">if</span> (ascending) {</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">\n</span><span class="st">(Top 50 countries with lowest access rate)"</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">\n</span><span class="st">(Top 50 countries with highest access rate)"</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>      }),</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_column,</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y_column</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># Use minimal theme</span></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)  <span class="co"># Rotate x-axis labels</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># Set y-axis range</span></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(output_file)) {</span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="fu">dirname</span>(output_file))) {</span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggsave</span>(output_file, <span class="at">plot =</span> p, <span class="at">width =</span> width, <span class="at">height =</span> height)  <span class="co"># Save image</span></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">message</span>(<span class="st">"Image saved to: "</span>, output_file)</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">warning</span>(<span class="st">"Output directory does not exist: "</span>, <span class="fu">dirname</span>(output_file))</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)  <span class="co"># Print image</span></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Save plot examples</span></span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_scatter</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Clean_Fuels_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">50</span>, <span class="at">output_file =</span> <span class="st">"clean_fuels_top_50.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Image saved to: clean_fuels_top_50.png</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_scatter</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Electricity_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">50</span>, <span class="at">output_file =</span> <span class="st">"electricity_top_50.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Image saved to: electricity_top_50.png</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_scatter</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Clean_Fuels_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">50</span>, <span class="at">ascending =</span> <span class="cn">TRUE</span>, <span class="at">output_file =</span> <span class="st">"clean_fuels_bottom_50.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Image saved to: clean_fuels_bottom_50.png</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_scatter</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Electricity_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">50</span>, <span class="at">ascending =</span> <span class="cn">TRUE</span>, <span class="at">output_file =</span> <span class="st">"electricity_bottom_50.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Image saved to: electricity_bottom_50.png</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-15-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bar-chart-visualisation-of-access-rates" class="level2">
+<h2 class="anchored" data-anchor-id="bar-chart-visualisation-of-access-rates">Bar Chart Visualisation of Access Rates</h2>
+<p>I developed a function called plot_bar() to visualize the top 10 countries with both the highest and lowest access rates for electricity and clean fuels. The bar chart format is ideal for comparing categories, making me easy to rank countries by their access rates and clearly display differences between them. This focused comparison provides a visual hierarchy, helping me to identify countries that lead in energy access and those with critical gaps, supporting targeted policy interventions to bridge these disparities.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the top 10 countries with the highest electricity access rate</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>plot_bar <span class="ot">&lt;-</span> <span class="cf">function</span>(data, x_column, y_column, <span class="at">top_n_countries =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">15</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">output_file =</span> <span class="cn">NULL</span>, <span class="at">ascending =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (ascending) {</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column)) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">head</span>(top_n_countries)  <span class="co"># Sort in ascending order</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column))) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">head</span>(top_n_countries)  <span class="co"># Sort in descending order</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>  data[[x_column]] <span class="ot">&lt;-</span> <span class="fu">factor</span>(data[[x_column]], <span class="at">levels =</span> data[[x_column]])  <span class="co"># Convert x-axis to factor</span></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">!!</span><span class="fu">sym</span>(x_column), <span class="at">y =</span> <span class="sc">!!</span><span class="fu">sym</span>(y_column))) <span class="sc">+</span></span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span>  <span class="co"># Plot bar chart</span></span>
+<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(<span class="sc">!!</span><span class="fu">sym</span>(y_column), <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>) <span class="sc">+</span>  <span class="co"># Add data labels</span></span>
+<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste</span>(y_column, <span class="st">"by"</span>, x_column, <span class="cf">if</span> (ascending) {</span>
+<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">\n</span><span class="st">(Top 10 countries with lowest access rate)"</span></span>
+<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">\n</span><span class="st">(Top 10 countries with highest access rate)"</span></span>
+<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a>      }, y_column, <span class="st">")"</span>),</span>
+<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_column,</span>
+<span id="cb56-23"><a href="#cb56-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y_column</span>
+<span id="cb56-24"><a href="#cb56-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb56-25"><a href="#cb56-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># Use minimal theme</span></span>
+<span id="cb56-26"><a href="#cb56-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb56-27"><a href="#cb56-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)  <span class="co"># Rotate x-axis labels</span></span>
+<span id="cb56-28"><a href="#cb56-28" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)  <span class="co"># Set y-axis range</span></span>
+<span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(output_file)) {</span>
+<span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggsave</span>(output_file, <span class="at">plot =</span> p, <span class="at">width =</span> width, <span class="at">height =</span> height)  <span class="co"># Save image</span></span>
+<span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)  <span class="co"># Print image</span></span>
+<span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb56-36"><a href="#cb56-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-37"><a href="#cb56-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot visualizations for the countries with the highest electricity access rate</span></span>
+<span id="cb56-38"><a href="#cb56-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Clean_Fuels_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">10</span>)  <span class="co"># Highest clean fuel access rate countries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Electricity_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">10</span>)  <span class="co"># Highest electricity access rate countries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Clean_Fuels_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">10</span>, <span class="at">ascending =</span> <span class="cn">TRUE</span>)  <span class="co"># Lowest clean fuel access rate countries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(latest_data, <span class="st">"Country"</span>, <span class="st">"Electricity_Access_Rate"</span>, <span class="at">top_n_countries =</span> <span class="dv">10</span>, <span class="at">ascending =</span> <span class="cn">TRUE</span>)  <span class="co"># Lowest electricity access rate countries</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="SOCS0100_Report_1_files/figure-html/unnamed-chunk-16-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="critical-engagement-with-ai" class="level2">
+<h2 class="anchored" data-anchor-id="critical-engagement-with-ai">Critical Engagement with AI</h2>
+<p>Throughout my SOCS0100 project, I utilised ChatGPT as a collaborative tool to refine data wrangling and visualisation code. Its assistance was instrumental in simplifying complex coding challenges, often offering insightful suggestions that made the code more efficient and readable.</p>
+<p>For example, when dealing with the raw data, I was initially unsure whether to delete rows with irrelevant or missing values or to impute them using mean or median. After some conversations with ChatGPT, its guidance helped me decide on the best approach, resulting in a cleaner workflow.</p>
+<p>In evaluating ChatGPT’s contributions, I found its value lay in iterative code improvement and proposing innovative solutions. However, its limitations became apparent in understanding the specific context of my energy dataset or handling nuanced tasks that required human intuition. Despite these challenges, it spurred me to think more deeply about my code’s structure and logic, ultimately making my approach more robust.</p>
+<p>Reflecting on this experience, ChatGPT positively impacted my assessment by providing prompt support during moments of uncertainty, which boosted my confidence in tackling complex aspects of the project. Its involvement led to a more streamlined approach to data analysis, contributing meaningfully to my overall learning experience at SOCS0100 course.</p>
+</section>
+<section id="words-count-1498" class="level2">
+<h2 class="anchored" data-anchor-id="words-count-1498">Words count: 1498</h2>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
